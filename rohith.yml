@@ -4,7 +4,7 @@ trigger:
       - main
 
 pool:
-  vmImage: new
+  vmImage: rohith
 
 steps:
 - task: AzureCLI@2
