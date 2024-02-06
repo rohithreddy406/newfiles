@@ -4,7 +4,7 @@ trigger:
       - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: rohith
 
 steps:
 - task: AzureCLI@2
@@ -17,11 +17,31 @@ steps:
       # Install kubectl
       az aks install-cli
 
+- task: AzureCLI@2
+  displayName: 'Get AKS Credentials'
+  inputs:
+    azureSubscription: '56374a4e-7e63-4d89-8e8e-2e57019720c6'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # Get AKS credentials
+      az aks get-credentials --resource-group <resource-group-name> --name <aks-cluster-name>
 
-# Add more steps for your deployment process here
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+- task: AzureCLI@2
+  displayName: 'Kubectl Get Pods'
+  inputs:
+    azureSubscription: '56374a4e-7e63-4d89-8e8e-2e57019720c6'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # Run kubectl get pods command
+      kubectl get pods
+
+- task: AzureCLI@2
+  displayName: 'Kubectl Logs Pod'
+  inputs:
+    azureSubscription: '56374a4e-7e63-4d89-8e8e-2e57019720c6>'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # Run kubectl logs command
+      kubectl logs my-pod
 
 
