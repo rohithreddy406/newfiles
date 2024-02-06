@@ -10,7 +10,7 @@ steps:
 - task: AzureCLI@2
   displayName: 'Install kubectl'
   inputs:
-    azureSubscription: '56374a4e-7e63-4d89-8e8e-2e57019720c6'
+    azureSubscription: 'new'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
@@ -20,16 +20,16 @@ steps:
 - task: AzureCLI@2
   displayName: 'Get AKS Credentials'
   inputs:
-    azureSubscription: '56374a4e-7e63-4d89-8e8e-2e57019720c6'
+    azureSubscription: 'new'
     scriptLocation: 'inlineScript'
     inlineScript: |
       # Get AKS credentials
-      az aks get-credentials --resource-group <resource-group-name> --name <aks-cluster-name>
+      az aks get-credentials --resource-group new --name rohith
 
 - task: AzureCLI@2
   displayName: 'Kubectl Get Pods'
   inputs:
-    azureSubscription: '56374a4e-7e63-4d89-8e8e-2e57019720c6'
+    azureSubscription: 'new'
     scriptLocation: 'inlineScript'
     inlineScript: |
       # Run kubectl get pods command
@@ -38,7 +38,7 @@ steps:
 - task: AzureCLI@2
   displayName: 'Kubectl Logs Pod'
   inputs:
-    azureSubscription: '56374a4e-7e63-4d89-8e8e-2e57019720c6>'
+    azureSubscription: 'new'
     scriptLocation: 'inlineScript'
     inlineScript: |
       # Run kubectl logs command
