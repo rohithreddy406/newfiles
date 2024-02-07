@@ -9,7 +9,7 @@ variables:
   azureContainerRegistry: 'godsave.azurecr.io'
   dockerImageName: 'james'
   kubernetesNamespace: 'default'
-  kubernetesDeploymentName: 'king'
+  kubernetesDeploymentName: 'ken'
   kubernetesServiceName: 'don'
   kubernetesManifestsPath: '$(Build.SourcesDirectory)/k8s'
 
@@ -35,6 +35,6 @@ steps:
     azureResourceGroup: 'new'
     kubernetesCluster: 'game'
     command: 'apply'
-    arguments: '-f $(kubernetesManifestsPath)'
+    arguments: '-f $(kubernetesManifestsPath)/deployment.yaml'
     secretType: 'dockerRegistry'
     secretArguments: '-docker-server $godsave.azurecr.io -docker-username $godsave -docker-password $4fc/Hv2/4He24p2qlf1vZlL1cFyMredwuLJLOmDSz1+ACRBAOxbz'
