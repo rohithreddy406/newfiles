@@ -1,0 +1,40 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'rohith'
+
+variables:
+  azureServiceConnection: 'new'
+  azureContainerRegistry: 'godsave.azurecr.io'
+  dockerImageName: 'james'
+  kubernetesNamespace: 'default'
+  kubernetesDeploymentName: 'king'
+  kubernetesServiceName: 'don'
+  kubernetesManifestsPath: '$(Build.SourcesDirectory)/k8s'
+
+steps:
+- task: Docker@2
+  displayName: 'Tag Docker image'
+  inputs:
+    command: 'tag'
+    arguments: 'james:0.0.1 $godsave.azurecr.io/$james:$(Build.BuildId)'
+
+- task: Docker@2
+  displayName: 'Push Docker image'
+  inputs:
+    command: 'push'
+    repository: '$godsave.azurecr.io/$james'
+    tags: '$(Build.BuildId)'
+
+- task: Kubernetes@1
+  displayName: 'Deploy to Kubernetes cluster'
+  inputs:
+    connectionType: 'Azure Resource Manager'
+    azureSubscriptionEndpoint: '$(azureServiceConnection)'
+    azureResourceGroup: 'new'
+    kubernetesCluster: 'game'
+    command: 'apply'
+    arguments: '-f $(kubernetesManifestsPath)'
+    secretType: 'dockerRegistry'
+    secretArguments: '-docker-server $godsave.azurecr.io -docker-username $godsave -docker-password $4fc/Hv2/4He24p2qlf1vZlL1cFyMredwuLJLOmDSz1+ACRBAOxbz'
