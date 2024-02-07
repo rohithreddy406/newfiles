@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ROHITH'
+  vmImage: 'agent'
 
 variables:
   azureServiceConnection: 'new'
